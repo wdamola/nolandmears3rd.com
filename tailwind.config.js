@@ -4,12 +4,16 @@ module.exports = {
   content: [
     "app/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-      "*.{js,ts,jsx,tsx,mdx}"
-],
+  ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1rem",
+        md: "2rem",
+        lg: "3rem",
+      },
+    },
     extend: {
       colors: {
         dark: {
@@ -56,6 +60,15 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      animation: {
+        matrix: "matrix-fade 0.5s ease-in-out infinite",
+        click: "click 0.3s ease-in-out",
+        marquee: "marquee 36s linear infinite",
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
+      },
       keyframes: {
         "matrix-fade": {
           "0%, 100%": { opacity: 0 },
@@ -65,10 +78,10 @@ module.exports = {
           "0%, 100%": { transform: "scale(1)" },
           "50%": { transform: "scale(0.95)" },
         },
-      },
-      animation: {
-        matrix: "matrix-fade 0.5s ease-in-out infinite",
-        click: "click 0.3s ease-in-out",
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

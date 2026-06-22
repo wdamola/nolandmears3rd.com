@@ -1,17 +1,20 @@
 import "./globals.css"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import type { Metadata, Viewport } from "next"
 import type React from "react"
-import { SplashScreen } from "@/components/splash-screen"
-import { Logo } from "@/components/logo"
-import { CustomCursor } from "@/components/custom-cursor"
-
-const inter = Inter({ subsets: ["latin"] })
+import { ClientChrome } from "@/components/client-chrome"
+import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/site-header"
+import { bodyFont, displayFont, scriptFont } from "@/lib/fonts"
 
 export const metadata: Metadata = {
-  title: "SDFM 2520 - Premium Hoodies",
-  description: "Premium streetwear and comfortable hoodies",
-    generator: 'v0.app'
+  title: "nolandmears3rd — Premium Streetwear",
+  description: "Premium streetwear by Noland Mears III. Limited drops. Brutalist design.",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({
@@ -20,21 +23,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={`${inter.className} bg-dark-900 text-gray-100`}>
-        <SplashScreen />
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none">
-          <Logo />
-        </div>
+    <html
+      lang="en"
+      className={`dark scroll-smooth ${displayFont.variable} ${bodyFont.variable} ${scriptFont.variable}`}
+    >
+      <body className={`${bodyFont.className} overflow-x-clip bg-dark-900 font-body text-gray-100`}>
+        <ClientChrome />
+        <SiteHeader />
         {children}
-        <footer className="w-full py-6 px-4 bg-dark-600 text-gray-400">
-          <div className="container mx-auto text-center">
-            <p>&copy; 2023 SDFM 2520. All rights reserved.</p>
-          </div>
-        </footer>
-        <CustomCursor />
+        <SiteFooter />
       </body>
     </html>
   )
 }
-

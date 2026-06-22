@@ -1,45 +1,35 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 export function SplashScreen() {
   const [progress, setProgress] = useState(0)
-  const [matrixText, setMatrixText] = useState("")
   const [isFading, setIsFading] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
 
   useEffect(() => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%"
-    let interval: NodeJS.Timeout
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const hasSeenSplash = sessionStorage.getItem("noland-splash-seen") === "true"
 
-    // Matrix text effect
-    const matrixInterval = setInterval(() => {
-      const randomText = Array(8)
-        .fill(0)
-        .map(() => characters.charAt(Math.floor(Math.random() * characters.length)))
-        .join("")
-      setMatrixText(randomText)
-    }, 50)
+    if (prefersReducedMotion || hasSeenSplash) {
+      setIsHidden(true)
+      return
+    }
 
-    // Progress bar animation
-    interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval)
-          clearInterval(matrixInterval)
-          setTimeout(() => setIsFading(true), 500)
+          window.clearInterval(interval)
+          sessionStorage.setItem("noland-splash-seen", "true")
+          window.setTimeout(() => setIsFading(true), 150)
           return 100
         }
-        return prev + 1
+        return prev + 8
       })
-    }, 30)
+    }, 16)
 
-    return () => {
-      clearInterval(interval)
-      clearInterval(matrixInterval)
-    }
+    return () => window.clearInterval(interval)
   }, [])
 
   if (isHidden) {
@@ -49,8 +39,8 @@ export function SplashScreen() {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[60] flex flex-col items-center justify-center bg-dark-900 transition-opacity duration-500",
-        isFading ? "opacity-0 pointer-events-none" : "opacity-100",
+        "fixed inset-0 z-[60] flex flex-col items-center justify-center bg-dark-900 px-4 pt-[env(safe-area-inset-top)] transition-opacity duration-300 motion-reduce:opacity-0",
+        isFading ? "pointer-events-none opacity-0" : "opacity-100",
       )}
       onTransitionEnd={() => {
         if (isFading) {
@@ -58,27 +48,14 @@ export function SplashScreen() {
         }
       }}
     >
-      <div className="relative w-48 h-48 mb-8">
-        <Image
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20sdfm-gDlxg0zxe6wVV9o5cISteykVa4LQhz.png"
-          alt="SDFM 2520"
-          fill
-          className="object-contain"
-          priority
-        />
+      <p className="text-center font-display text-3xl uppercase tracking-wide text-white sm:text-4xl md:text-5xl">
+        nolandmears3rd
+      </p>
+      <p className="mt-3 text-xs font-medium uppercase tracking-[0.25em] text-white/40">Loading Drop 01</p>
+
+      <div className="mt-8 h-px w-48 overflow-hidden bg-white/10">
+        <div className="h-full bg-white transition-all duration-75 ease-out" style={{ width: `${progress}%` }} />
       </div>
-
-      {/* Matrix-style loading text */}
-      <div className="font-mono text-white mb-4 h-6">{`LOADING_SYSTEM: ${matrixText}`}</div>
-
-      {/* Progress bar container */}
-      <div className="w-64 h-1 bg-dark-400 rounded-full overflow-hidden">
-        <div className="h-full bg-white transition-all duration-100 ease-out" style={{ width: `${progress}%` }} />
-      </div>
-
-      {/* Progress percentage */}
-      <div className="mt-2 font-mono text-sm text-white">{`${progress}%`}</div>
     </div>
   )
 }
-
