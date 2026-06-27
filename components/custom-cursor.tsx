@@ -6,7 +6,7 @@ export function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number | undefined>(undefined)
   const positionRef = useRef({ x: 0, y: 0 })
-  const enabledRef = useRef(false)
+  const hasMovedRef = useRef(false)
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(pointer: fine)").matches
@@ -21,11 +21,16 @@ export function CustomCursor() {
       return
     }
 
-    enabledRef.current = true
-    cursor.style.display = "block"
+    const root = document.documentElement
+    root.classList.add("custom-cursor-enabled")
 
     const updatePosition = (event: MouseEvent) => {
       positionRef.current = { x: event.clientX, y: event.clientY }
+
+      if (!hasMovedRef.current) {
+        hasMovedRef.current = true
+        cursor.classList.add("is-visible")
+      }
 
       if (rafRef.current !== undefined) {
         return
@@ -47,7 +52,7 @@ export function CustomCursor() {
     window.addEventListener("click", handleClick)
 
     return () => {
-      enabledRef.current = false
+      root.classList.remove("custom-cursor-enabled")
       window.removeEventListener("mousemove", updatePosition)
       window.removeEventListener("click", handleClick)
       if (rafRef.current !== undefined) {
@@ -56,11 +61,6 @@ export function CustomCursor() {
     }
   }, [])
 
-  return (
-    <div
-      ref={cursorRef}
-      className="custom-cursor hidden"
-      aria-hidden="true"
-    />
-  )
+  return <div ref={cursorRef} className="custom-cursor" aria-hidden="true" />
+
 }

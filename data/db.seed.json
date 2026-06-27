@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": "prod_1",
+      "name": "Classic Black Hoodie",
+      "sku": "NM3-HD-01",
+      "price": 149.99,
+      "description": "Heavyweight black fleece hoodie with structured fit.",
+      "image1": "",
+      "image2": "",
+      "featured": true,
+      "published": true,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod_2",
+      "name": "Premium Gray Hoodie",
+      "sku": "NM3-HD-02",
+      "price": 154.99,
+      "description": "Premium gray fleece with reinforced seams.",
+      "image1": "",
+      "image2": "",
+      "featured": false,
+      "published": true,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod_3",
+      "name": "Signature Navy Hoodie",
+      "sku": "NM3-HD-03",
+      "price": 159.99,
+      "description": "Deep navy hoodie with signature brand detailing.",
+      "image1": "",
+      "image2": "",
+      "featured": false,
+      "published": true,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "prod_4",
+      "name": "Limited Edition Hoodie",
+      "sku": "NM3-HD-04",
+      "price": 199.99,
+      "description": "Limited run edition with exclusive labeling.",
+      "image1": "",
+      "image2": "",
+      "featured": false,
+      "published": true,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "updatedAt": "2025-01-01T00:00:00.000Z"
+    }
+  ],
+  "subscribers": [],
+  "campaigns": [],
+  "settings": {
+    "siteName": "nolandmears3rd",
+    "contactEmail": "nmearsbrand@gmail.com",
+    "heroTagline": "Premium streetwear with brutalist intent. Heavyweight construction. Limited quantities.",
+    "brandStatement": "nolandmears3rd is a study in restraint — sharp silhouettes, heavy fabrics, and pieces made to outlast the trend cycle."
+  }
+}

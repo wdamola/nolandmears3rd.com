@@ -1,9 +1,7 @@
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
 import type React from "react"
-import { ClientChrome } from "@/components/client-chrome"
-import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
+import { ThemeProvider } from "@/components/theme-provider"
 import { bodyFont, displayFont, scriptFont } from "@/lib/fonts"
 
 export const metadata: Metadata = {
@@ -25,13 +23,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark scroll-smooth ${displayFont.variable} ${bodyFont.variable} ${scriptFont.variable}`}
+      suppressHydrationWarning
+      className={`scroll-smooth ${displayFont.variable} ${bodyFont.variable} ${scriptFont.variable}`}
     >
-      <body className={`${bodyFont.className} overflow-x-clip bg-dark-900 font-body text-gray-100`}>
-        <ClientChrome />
-        <SiteHeader />
-        {children}
-        <SiteFooter />
+      <body
+        className={`${bodyFont.className} overflow-x-clip bg-white font-body text-neutral-900 dark:bg-dark-900 dark:text-gray-100`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="noland-theme">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

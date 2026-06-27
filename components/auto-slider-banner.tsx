@@ -25,6 +25,9 @@ export function AutoSliderBanner() {
           <br />
           Mears III
         </h1>
+        <p className="mt-3 text-xs font-medium uppercase tracking-[0.28em] text-white/50 sm:tracking-[0.35em]">
+          Brand Incorporated
+        </p>
         <p className="mt-5 max-w-md text-sm leading-relaxed text-white/55">
           Premium streetwear with brutalist intent. Heavyweight construction. Limited quantities.
         </p>

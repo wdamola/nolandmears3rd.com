@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "clean": "node scripts/clean-next.mjs",
     "dev": "next dev",
+    "dev:clean": "node scripts/clean-next.mjs && next dev",
     "lint": "eslint .",
     "start": "next start"
   },
@@ -45,9 +47,11 @@
     "date-fns": "4.1.0",
     "embla-carousel-react": "8.5.1",
     "input-otp": "1.4.1",
+    "jose": "^6.2.3",
     "lucide-react": "^0.454.0",
     "next": "15.5.18",
     "next-themes": "^0.4.6",
+    "nodemailer": "^9.0.1",
     "react": "^19",
     "react-day-picker": "9.8.0",
     "react-dom": "^19",
@@ -62,6 +66,7 @@
   },
   "devDependencies": {
     "@types/node": "^24",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8.5",

@@ -39,7 +39,7 @@ export function SplashScreen() {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-[60] flex flex-col items-center justify-center bg-dark-900 px-4 pt-[env(safe-area-inset-top)] transition-opacity duration-300 motion-reduce:opacity-0",
+        "fixed inset-0 z-[60] flex flex-col items-center justify-center bg-white px-4 pt-[env(safe-area-inset-top)] transition-opacity duration-300 motion-reduce:opacity-0 dark:bg-dark-900",
         isFading ? "pointer-events-none opacity-0" : "opacity-100",
       )}
       onTransitionEnd={() => {
@@ -48,13 +48,18 @@ export function SplashScreen() {
         }
       }}
     >
-      <p className="text-center font-display text-3xl uppercase tracking-wide text-white sm:text-4xl md:text-5xl">
+      <p className="text-center font-display text-3xl uppercase tracking-wide text-neutral-900 dark:text-white sm:text-4xl md:text-5xl">
         nolandmears3rd
       </p>
-      <p className="mt-3 text-xs font-medium uppercase tracking-[0.25em] text-white/40">Loading Drop 01</p>
+      <p className="mt-3 text-xs font-medium uppercase tracking-[0.25em] text-neutral-500 dark:text-white/40">
+        Loading Drop 01
+      </p>
 
-      <div className="mt-8 h-px w-48 overflow-hidden bg-white/10">
-        <div className="h-full bg-white transition-all duration-75 ease-out" style={{ width: `${progress}%` }} />
+      <div className="mt-8 h-px w-48 overflow-hidden bg-black/10 dark:bg-white/10">
+        <div
+          className="h-full bg-neutral-900 transition-all duration-75 ease-out dark:bg-white"
+          style={{ width: `${progress}%` }}
+        />
       </div>
     </div>
   )
